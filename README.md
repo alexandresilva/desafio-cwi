@@ -16,10 +16,9 @@ identificado por um id único e pode votar apenas uma vez por pauta);
 
 ### Endpoints criados
 
-- [1] [POST /pauta/v1/cadastrar](http://127.0.0.1:8080/pauta/v1/cadastrar)
-- [2] [POST /sessao-votacao/v1/abrir](http://127.0.0.1:8080/sessao-votacao/v1/abrir)
-- [3] [POST /associado/v1/cadastrar](http://127.0.0.1:8080/associado/v1/cadastrar)
-- [4] [POST /sessao-votacao-associado/v1/votar](http://127.0.0.1:8080/sessao-votacao-associado/v1/votar)
-- [5] [GET /associado/v1/03099988801](http://127.0.0.1:8080/associado/v1/03099988801)
+- [1] [POST /pauta/v1/cadastrar](http://localhost:8081/pauta/v1/cadastrar)
+- [2] [POST /sessao-votacao/v1/abrir-sessao](http://localhost:8081/sessao-votacao/v1/abrir-sessao)
+- [3] [POST /sessao-votacao-associado/v1/votar](http://localhost:8081/v1/sessao-votacao-associado/votar)
+- [4] [POST /sessao-votacao-associado/v1/resultado/2](http://localhost:8081/sessao-votacao-associado/v1/resultado/2)
 
 ***
