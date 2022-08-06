@@ -1,0 +1,20 @@
+server:
+  port: 8081
+
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    username: sa
+    url: jdbc:h2:mem:desafio
+    driverClassName: org.h2.Driver
+    password: 
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  batch:
+    jdbc:
+      initialize-schema: always

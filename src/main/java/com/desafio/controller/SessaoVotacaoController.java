@@ -25,9 +25,7 @@ public class SessaoVotacaoController {
 		sessaoVotacaoService.abrirSessaoVotacao(sv);
 		URI location = URI.create(String.format("/v1/abrir-sessao/%s", sv.getId()));
 	    return ResponseEntity.created(location).build();
-		        
-//		sessaoVotacaoService.abrirSessaoVotacao(s);
-//		return ResponseEntity.ok().build();
+
 	}
 
 }
