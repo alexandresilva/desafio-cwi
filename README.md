@@ -18,7 +18,38 @@ identificado por um id único e pode votar apenas uma vez por pauta);
 
 - [1] [POST /pauta/v1/cadastrar](http://localhost:8081/pauta/v1/cadastrar)
 - [2] [POST /sessao-votacao/v1/abrir-sessao](http://localhost:8081/sessao-votacao/v1/abrir-sessao)
-- [3] [POST /sessao-votacao-associado/v1/votar](http://localhost:8081/v1/sessao-votacao-associado/votar)
+- [3] [POST /sessao-votacao-associado/v1/votar](http://localhost:8081/sessao-votacao-associado/v1/votar)
 - [4] [POST /sessao-votacao-associado/v1/resultado/2](http://localhost:8081/sessao-votacao-associado/v1/resultado/2)
+
+### Exemplos de uso no Postman
+
+- [1] Cadastrar Pauta:
+```
+{
+    "descricao": "Pauta para votação do aumento salarial",
+    "dataCadastro": "2022-08-05T14:36:22"
+}
+```
+- [2] Abrir Sessão de Votação:
+```
+{
+    "descricao": "Sessão para votação da Pauta 1",
+    "dataCadastro": "2022-08-05T14:36:22",
+    "idPauta": 1,
+    "tempoAbertura": 30
+}
+```
+- [3] Votar: 
+```
+{
+    "idSessaoVotacao": 3,
+    "idAssociado": 2,
+    "voto": false
+}
+```
+- [4] Ver Resultado:
+```
+http://localhost:8081/sessao-votacao-associado/v1/resultado/3
+```
 
 ***

@@ -35,20 +35,20 @@ public class SessaoVotacaoAssociadoService {
 	@Autowired
 	private AssociadoRepository associadoRepository;
 
-	public void enviarVoto(Long idAssociado, Long idSessaoVotacao, Boolean voto) {
+	public void enviarVoto(SessaoVotacaoAssociado sva) {
 
-		SessaoVotacaoAssociado sva = new SessaoVotacaoAssociado();
-		sva.setIdAssociado(idAssociado);
-		sva.setIdSessaoVotacao(idSessaoVotacao);
-		sva.setVoto(voto);
 		sva.setDataCadastro(LocalDateTime.now());
 
-		Optional<Associado> associado = associadoRepository.findById(idAssociado);
-		Optional<SessaoVotacao> verificaSessao = sessaoVotacaoRepository.findById(idSessaoVotacao);
+		Optional<Associado> associado = associadoRepository.findById(sva.getIdAssociado());
+		Optional<SessaoVotacao> verificaSessao = sessaoVotacaoRepository.findById(sva.getIdSessaoVotacao());
 		Optional<SessaoVotacaoAssociado> verificaVoto = sessaoVotacaoAssociadoRepository
-				.findByIdSessaoVotacaoAndIdAssociado(idSessaoVotacao, idAssociado);
+				.findByIdSessaoVotacaoAndIdAssociado(sva.getIdSessaoVotacao(), sva.getIdAssociado());
 
-		verificaDados(sva, associado, verificaSessao, verificaVoto);
+		if(verificaSessao.isPresent()) {
+			verificaDados(sva, associado, verificaSessao, verificaVoto);			
+		}else {
+			log.info("Sessão não existente.");
+		}
 
 	}
 
