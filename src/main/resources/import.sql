@@ -2,8 +2,8 @@ insert into PAUTA (id, descricao, data_cadastro) values (1, 'Aumento salarial pa
 insert into PAUTA (id, descricao, data_cadastro) values (2, 'Pauta para novo cargo', now());
 insert into PAUTA (id, descricao, data_cadastro) values (3, 'Expulsão de colaborador', now());
 
-insert into ASSOCIADO (id, nome, email, cpf, apto, data_cadastro) values (1, 'Alexandre Oliveira', 'alexandre@gmail.com', '00011122299', true, now());
-insert into ASSOCIADO (id, nome, email, cpf, apto, data_cadastro) values (2, 'Suzana Oliveira', 'suzana@gmail.com', '00011122288', true, now());
+insert into ASSOCIADO (id, nome, email, cpf, apto, data_cadastro) values (1, 'Alexandre Oliveira', 'alexandre@gmail.com', '29834198000', true, now());
+insert into ASSOCIADO (id, nome, email, cpf, apto, data_cadastro) values (2, 'Suzana Oliveira', 'suzana@gmail.com', '54502020087', true, now());
 
 insert into SESSAO_VOTACAO (id, descricao, data_cadastro, id_pauta, tempo_abertura) values (1, 'Sessão para votação de aumento salarial', now(), 1, 30);
 insert into SESSAO_VOTACAO (id, descricao, data_cadastro, id_pauta, tempo_abertura) values (2, 'Sessão para criação de novo cargo', now(), 2, 30);
