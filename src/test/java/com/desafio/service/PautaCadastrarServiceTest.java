@@ -74,4 +74,20 @@ public class PautaCadastrarServiceTest {
 		verify(pautaRepository).save(any(Pauta.class));
 	}
 
+	@Test(expected = ApiException.class)
+	public void naoCadastrarPautaComApenasUmaPalavra(){
+		
+		Pauta pauta = Pauta
+				.builder()
+				.id(1L)
+				.descricao("Pauta")
+				.dataCadastro(LocalDateTime.now())
+				.build();
+		pauta.setDataCadastro(null);
+
+		pautaCadastrarService.cadastrar(pauta);
+
+		verify(pautaRepository).save(any(Pauta.class));
+	}
+
 }

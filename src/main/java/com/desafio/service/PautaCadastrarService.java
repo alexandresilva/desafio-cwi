@@ -31,6 +31,9 @@ public class PautaCadastrarService {
 		if(pauta.getDescricao() == null)
 			throw new ApiException("Campo 'Descrição' é obrigatório");
 		
+		if(pauta.getDescricao().split(" ").length <= 1)
+			throw new ApiException("Campo 'Descrição' deve possuir mais de uma palavra");
+		
 		if(pauta.getDataCadastro() == null)
 			throw new ApiException("Data de Cadatro é obrigatória");
 		
