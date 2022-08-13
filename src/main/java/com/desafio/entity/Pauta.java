@@ -11,11 +11,13 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
 @Table(name = "pauta")
 @Data
+@Builder
 public class Pauta {
 	
 	@Id
@@ -31,6 +33,12 @@ public class Pauta {
 			
 	public Pauta() {
 		super();
+	}
+	
+	public Pauta(Long id, String descricao, LocalDateTime dataCadastro) {
+		this.id = id;
+		this.dataCadastro = LocalDateTime.now();
+		this.descricao = descricao;
 	}
 
 	public Pauta(String descricao) {

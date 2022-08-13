@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.desafio.entity.Pauta;
+import com.desafio.exception.ApiException;
 import com.desafio.repository.PautaRepository;
 
 @Service
@@ -18,9 +19,20 @@ public class PautaCadastrarService {
 
 	public void cadastrar(Pauta pauta) {
 		
+		validaRegrasDeNegocio(pauta);
+		
 		pautaRepository.save(pauta);
 		
 		log.info("Cadastrando Pauta -> [ID "+pauta.getId()+"]");
 	}
 	
+	private void validaRegrasDeNegocio(Pauta pauta) {
+		
+		if(pauta.getDescricao() == null)
+			throw new ApiException("Campo 'Descrição' é obrigatório");
+		
+		if(pauta.getDataCadastro() == null)
+			throw new ApiException("Data de Cadatro é obrigatória");
+		
+	}
 }
