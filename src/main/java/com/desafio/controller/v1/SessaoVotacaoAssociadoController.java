@@ -14,9 +14,11 @@ import com.desafio.entity.SessaoVotacaoAssociado;
 import com.desafio.entity.Votacao;
 import com.desafio.service.SessaoVotacaoAssociadoService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
+@Api(value = "Sessão Votação Associado")
 @RequestMapping("/sessao-votacao-associado/v1")
 public class SessaoVotacaoAssociadoController {
 	

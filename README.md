@@ -37,7 +37,7 @@ O comando acima irá baixar todas as dependências do projeto e criar um diretó
 Este projeto está rodando com a versão 1.8
 
 ## Swagger
-- [http://localhost:8081//swagger-ui.html](http://localhost:8081//swagger-ui.html)
+- [http://localhost:8081/swagger-ui.html](http://localhost:8081/swagger-ui.html)
 
 ## Endpoints criados
 

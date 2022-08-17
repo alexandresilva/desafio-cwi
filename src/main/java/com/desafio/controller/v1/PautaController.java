@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.desafio.dto.PautaDTO;
 import com.desafio.service.PautaCadastrarService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
+@Api(value = "Pauta")
 @RequestMapping("/pauta/v1")
 public class PautaController {
 	

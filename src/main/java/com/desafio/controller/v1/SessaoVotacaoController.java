@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.desafio.entity.SessaoVotacao;
 import com.desafio.service.SessaoVotacaoService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
+@Api(value = "Sessão Votação")
 @RequestMapping("/sessao-votacao/v1")
 public class SessaoVotacaoController {
 	
