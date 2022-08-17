@@ -1,4 +1,4 @@
-package com.desafio.controller;
+package com.desafio.controller.v1;
 
 import java.net.URI;
 
@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.desafio.entity.Pauta;
+import com.desafio.dto.PautaDTO;
 import com.desafio.service.PautaCadastrarService;
 
 @RestController
-@RequestMapping("/pauta")
+@RequestMapping("/pauta/v1")
 public class PautaController {
 	
 	@Autowired
 	private PautaCadastrarService pautaCadastrarService;
 	
-	@PostMapping("/v1/cadastrar")
-	public ResponseEntity<Pauta> cadastrar(@RequestBody Pauta pauta) {
-		pautaCadastrarService.cadastrar(pauta);
-		URI location = URI.create(String.format("/v1/cadastrar/%s", pauta.getId()));
+	@PostMapping("/cadastrar")
+	public ResponseEntity<PautaDTO> cadastrar(@RequestBody PautaDTO pautaDTO) {
+		pautaCadastrarService.cadastrar(pautaDTO);
+		URI location = URI.create(String.format("/cadastrar/%s", pautaDTO.getId()));
 	    return ResponseEntity.created(location).build();
 	}
 

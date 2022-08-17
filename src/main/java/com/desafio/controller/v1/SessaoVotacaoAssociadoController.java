@@ -1,4 +1,4 @@
-package com.desafio.controller;
+package com.desafio.controller.v1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,19 +15,19 @@ import com.desafio.entity.Votacao;
 import com.desafio.service.SessaoVotacaoAssociadoService;
 
 @RestController
-@RequestMapping("/sessao-votacao-associado")
+@RequestMapping("/sessao-votacao-associado/v1")
 public class SessaoVotacaoAssociadoController {
 	
 	@Autowired
 	private SessaoVotacaoAssociadoService sessaoVotacaoAssociadoService;
 	
-	@PostMapping("/v1/votar")
+	@PostMapping("/votar")
 	public ResponseEntity<SessaoVotacao> enviarVoto(@RequestBody SessaoVotacaoAssociado sva) {
 		sessaoVotacaoAssociadoService.enviarVoto(sva);
 		return ResponseEntity.ok().build();
 	}
 	
-	@GetMapping("/v1/resultado/{idPauta}")
+	@GetMapping("/resultado/{idPauta}")
 	public Votacao resultado(@PathVariable Long idPauta) {		
 		return sessaoVotacaoAssociadoService.resultado(idPauta);
 	}

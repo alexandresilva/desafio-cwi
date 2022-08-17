@@ -1,4 +1,4 @@
-package com.desafio.controller;
+package com.desafio.controller.v1;
 
 import java.net.URI;
 
@@ -13,17 +13,17 @@ import com.desafio.entity.SessaoVotacao;
 import com.desafio.service.SessaoVotacaoService;
 
 @RestController
-@RequestMapping("/sessao-votacao")
+@RequestMapping("/sessao-votacao/v1")
 public class SessaoVotacaoController {
 	
 	@Autowired
 	private SessaoVotacaoService sessaoVotacaoService;
 	
-	@PostMapping("/v1/abrir-sessao")
+	@PostMapping("/abrir-sessao")
 	public ResponseEntity<SessaoVotacao> abrirSessaoVotacao(@RequestBody SessaoVotacao sv) {
 		
 		sessaoVotacaoService.abrirSessaoVotacao(sv);
-		URI location = URI.create(String.format("/v1/abrir-sessao/%s", sv.getId()));
+		URI location = URI.create(String.format("/abrir-sessao/%s", sv.getId()));
 	    return ResponseEntity.created(location).build();
 
 	}
