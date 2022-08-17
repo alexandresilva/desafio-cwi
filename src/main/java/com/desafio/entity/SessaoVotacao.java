@@ -11,11 +11,13 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
 @Table(name = "sessao_votacao")
 @Data
+@Builder
 public class SessaoVotacao {
 	
 	@Id
@@ -57,6 +59,15 @@ public class SessaoVotacao {
 		
 		this.descricao = descricao;
 		this.idPauta = idPauta;
+	}
+
+	public SessaoVotacao(Long id, String descricao, LocalDateTime dataCadastro, Long idPauta, Integer tempoAbertura) {
+		super();
+		this.id = id;
+		this.descricao = descricao;
+		this.dataCadastro = dataCadastro;
+		this.idPauta = idPauta;
+		this.tempoAbertura = tempoAbertura;
 	}
 
 }
