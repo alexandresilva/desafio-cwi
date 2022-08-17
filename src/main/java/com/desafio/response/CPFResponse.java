@@ -15,7 +15,7 @@ import lombok.ToString;
 @Builder
 public class CPFResponse {
 	
-	private String cpf;
+	private Long cpf;
 	private String status;
 
 }

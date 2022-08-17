@@ -44,14 +44,13 @@ public class SessaoVotacaoAssociadoService {
 
 		sva.setDataCadastro(LocalDateTime.now());
 
-		Optional<Associado> associado = associadoRepository.findById(sva.getIdAssociado());
 		Optional<SessaoVotacao> verificaSessao = sessaoVotacaoRepository.findById(sva.getIdSessaoVotacao());
-		Optional<SessaoVotacaoAssociado> verificaVoto = sessaoVotacaoAssociadoRepository
-				.findByIdSessaoVotacaoAndIdAssociado(sva.getIdSessaoVotacao(), sva.getIdAssociado());
-		
 
 		if(verificaSessao.isPresent()) {
-			CPFResponse cpfResponse = cpfClient.getCpf(Long.parseLong(associado.get().getCpf()));
+			Optional<SessaoVotacaoAssociado> verificaVoto = sessaoVotacaoAssociadoRepository
+					.findByIdSessaoVotacaoAndIdAssociado(sva.getIdSessaoVotacao(), sva.getIdAssociado());
+			Optional<Associado> associado = associadoRepository.findById(sva.getIdAssociado());
+			CPFResponse cpfResponse = cpfClient.getCpf(associado.get().getCpf());
 			cpfResponse.setCpf(associado.get().getCpf());
 			if(cpfResponse.getStatus().equals("ABLE_TO_VOTE")) {
 				verificaDados(sva, associado, verificaSessao, verificaVoto);

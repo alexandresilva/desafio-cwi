@@ -9,11 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
 @Table(name = "sessao_votacao_associado")
 @Data
+@Builder
 public class SessaoVotacaoAssociado {
 	
 	@Id
@@ -36,6 +38,7 @@ public class SessaoVotacaoAssociado {
 	public SessaoVotacaoAssociado() {
 		super();
 	}
+		
 
 	public SessaoVotacaoAssociado(Long idSessaoVotacao, Long idAssociado, Boolean voto) {
 		
@@ -55,6 +58,17 @@ public class SessaoVotacaoAssociado {
 		this.idSessaoVotacao = idSessaoVotacao;
 		this.idAssociado = idAssociado;
 		this.voto = voto;
+	}
+
+	
+	public SessaoVotacaoAssociado(Long id, Long idSessaoVotacao, Long idAssociado, Boolean voto,
+			LocalDateTime dataCadastro) {
+		super();
+		this.id = id;
+		this.idSessaoVotacao = idSessaoVotacao;
+		this.idAssociado = idAssociado;
+		this.voto = voto;
+		this.dataCadastro = dataCadastro;
 	}
 
 }
