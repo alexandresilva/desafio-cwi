@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.desafio.entity.SessaoVotacao;
 import com.desafio.service.SessaoVotacaoService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/sessao-votacao/v1")
 public class SessaoVotacaoController {
@@ -19,6 +21,7 @@ public class SessaoVotacaoController {
 	@Autowired
 	private SessaoVotacaoService sessaoVotacaoService;
 	
+	@ApiOperation(value = "Abre uam Sessão para Votação")
 	@PostMapping("/abrir-sessao")
 	public ResponseEntity<SessaoVotacao> abrirSessaoVotacao(@RequestBody SessaoVotacao sv) {
 		

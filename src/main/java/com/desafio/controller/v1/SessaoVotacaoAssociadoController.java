@@ -14,6 +14,8 @@ import com.desafio.entity.SessaoVotacaoAssociado;
 import com.desafio.entity.Votacao;
 import com.desafio.service.SessaoVotacaoAssociadoService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/sessao-votacao-associado/v1")
 public class SessaoVotacaoAssociadoController {
@@ -21,12 +23,14 @@ public class SessaoVotacaoAssociadoController {
 	@Autowired
 	private SessaoVotacaoAssociadoService sessaoVotacaoAssociadoService;
 	
+	@ApiOperation(value = "Inserir apenas um voto por Associado")
 	@PostMapping("/votar")
 	public ResponseEntity<SessaoVotacao> enviarVoto(@RequestBody SessaoVotacaoAssociado sva) {
 		sessaoVotacaoAssociadoService.enviarVoto(sva);
 		return ResponseEntity.ok().build();
 	}
 	
+	@ApiOperation(value = "Retorna o resultado da Votação por Pauta")
 	@GetMapping("/resultado/{idPauta}")
 	public Votacao resultado(@PathVariable Long idPauta) {		
 		return sessaoVotacaoAssociadoService.resultado(idPauta);

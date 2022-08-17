@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.desafio.dto.PautaDTO;
 import com.desafio.service.PautaCadastrarService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/pauta/v1")
 public class PautaController {
@@ -19,6 +21,7 @@ public class PautaController {
 	@Autowired
 	private PautaCadastrarService pautaCadastrarService;
 	
+	@ApiOperation(value = "Cadastra uma Pauta para Votação")
 	@PostMapping("/cadastrar")
 	public ResponseEntity<PautaDTO> cadastrar(@RequestBody PautaDTO pautaDTO) {
 		pautaCadastrarService.cadastrar(pautaDTO);

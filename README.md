@@ -36,6 +36,9 @@ O comando acima irá baixar todas as dependências do projeto e criar um diretó
 <h2>Configurações do Java</h2>
 Este projeto está rodando com a versão 1.8
 
+## Swagger
+- [http://localhost:8081//swagger-ui.html](http://localhost:8081//swagger-ui.html)
+
 ## Endpoints criados
 
 - [1] [POST /pauta/v1/cadastrar](http://localhost:8081/pauta/v1/cadastrar)
