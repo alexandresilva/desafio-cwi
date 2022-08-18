@@ -7,15 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "associado")
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Associado {
 	
 	@Id
@@ -37,38 +39,5 @@ public class Associado {
 	
 	@Column(name = "data_cadastro", nullable = false)
 	private LocalDateTime dataCadastro;
-
-	public Associado() {
-		super();
-	}
-
-	public Associado(String nome, String email, Long cpf) {
-		
-		if( nome == null){
-			throw new IllegalArgumentException("O Associado não pode ser criado sem NOME");
-		}
-		
-		if(email == null ){
-			throw new IllegalArgumentException("O Associado não pode ser criado sem EMAIL");
-		}
-		
-		if(cpf == null ){
-			throw new IllegalArgumentException("O Associado não pode ser criado sem CPF");
-		}
-		
-		this.nome = nome;
-		this.email = email;
-		this.cpf = cpf;
-	}
-
-	public Associado(Long id, String nome, String email, Long cpf, Boolean apto, LocalDateTime dataCadastro) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.email = email;
-		this.cpf = cpf;
-		this.apto = apto;
-		this.dataCadastro = dataCadastro;
-	}
 
 }

@@ -23,7 +23,7 @@ git clone https://github.com/alexandresilva/desafio-cwi.git
 ```
 
 ## Build
-<h2>Via Maven</h2>
+### Via Maven
 Para construir o projeto com o Maven, executar os comando abaixo:
 
 Executar o comando:  
@@ -33,7 +33,7 @@ mvn clean package install
 ```
 O comando acima irá baixar todas as dependências do projeto e criar um diretório **target** com os artefatos construídos, que incluem o arquivo jar do projeto. Além disso, serão executados os testes unitários, e se algum falhar, o Maven exibirá essa informação no console.
 
-<h2>Configurações do Java</h2>
+### Configurações do Java
 Este projeto está rodando com a versão 1.8
 
 ## Swagger

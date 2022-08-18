@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +18,11 @@ import com.desafio.repository.SessaoVotacaoRepository;
 import com.desafio.repository.VotacaoRepository;
 import com.desafio.response.CPFResponse;
 
-@Service
-public class SessaoVotacaoAssociadoService {
+import lombok.extern.slf4j.Slf4j;
 
-	private static final Logger log = LoggerFactory.getLogger(SessaoVotacaoAssociadoService.class);
+@Service
+@Slf4j
+public class SessaoVotacaoAssociadoService {
 
 	@Autowired
 	private SessaoVotacaoAssociadoRepository sessaoVotacaoAssociadoRepository;
@@ -40,6 +39,11 @@ public class SessaoVotacaoAssociadoService {
 	@Autowired
 	private CPFClient cpfClient;
 
+	/**
+		Método para enviar o voto do Associado
+		@author Alexandre Oliveira
+		@version 1.0
+	*/
 	public void enviarVoto(SessaoVotacaoAssociado sva) {
 
 		sva.setDataCadastro(LocalDateTime.now());
@@ -47,45 +51,53 @@ public class SessaoVotacaoAssociadoService {
 		Optional<SessaoVotacao> verificaSessao = sessaoVotacaoRepository.findById(sva.getIdSessaoVotacao());
 
 		if(verificaSessao.isPresent()) {
-			Optional<SessaoVotacaoAssociado> verificaVoto = sessaoVotacaoAssociadoRepository
-					.findByIdSessaoVotacaoAndIdAssociado(sva.getIdSessaoVotacao(), sva.getIdAssociado());
-			Optional<Associado> associado = associadoRepository.findById(sva.getIdAssociado());
-			CPFResponse cpfResponse = cpfClient.getCpf(associado.get().getCpf());
-			cpfResponse.setCpf(associado.get().getCpf());
-			if(cpfResponse.getStatus().equals("ABLE_TO_VOTE")) {
-				verificaDados(sva, associado, verificaSessao, verificaVoto);
+			
+			Optional<SessaoVotacaoAssociado> verificaVoto = sessaoVotacaoAssociadoRepository.findByIdSessaoVotacaoAndIdAssociado(sva.getIdSessaoVotacao(), sva.getIdAssociado());
+			
+			if(verificaVoto.isPresent()) {
+				
+				Optional<Associado> associado = associadoRepository.findById(sva.getIdAssociado());
+				CPFResponse cpfResponse = cpfClient.getCpf(associado.get().getCpf());
+				cpfResponse.setCpf(associado.get().getCpf());
+				
+				if(cpfResponse.getStatus().equals("ABLE_TO_VOTE") && associado.get().getApto()) {
+					
+					if (verificaEncerramentoSessao(verificaSessao)) {
+						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+						String dataEncerramento = verificaSessao.get().getDataCadastro().format(formatter);
+						log.info("Sessão Encerrada -> [Horário encerramento: " + dataEncerramento + "]");
+					} else {
+						sessaoVotacaoAssociadoRepository.save(sva);
+						log.info("Votação inserida com sucesso.");
+					}
+					
+				}else {
+					log.info("O CPF " + cpfResponse.getCpf() + " NÃO ESTÁ APTO para votar");
+				}
+				
 			}else {
-				log.info("O CPF " + cpfResponse.getCpf() + " NÃO ESTÁ APTO para votar");
+				log.info("Associado já votou nesta Sessão.");
 			}
+			
 		}else {
 			log.info("Sessão não existente.");
 		}
 
 	}
 
-	private void verificaDados(SessaoVotacaoAssociado sva, Optional<Associado> associado,
-			Optional<SessaoVotacao> verificaSessao, Optional<SessaoVotacaoAssociado> verificaVoto) {
-
-		if (associado.get().getApto()) {
-			if (verificaSessao.get().getDataCadastro().plusMinutes(verificaSessao.get().getTempoAbertura())
-					.isBefore(LocalDateTime.now())) {
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-				String dataEncerramento = verificaSessao.get().getDataCadastro().format(formatter);
-				log.info("Sessão Encerrada -> [Horário encerramento: " + dataEncerramento + "]");
-			} else if (verificaVoto.isPresent()) {
-				log.info("Associado já votou nesta Sessão.");
-			} else {
-				sessaoVotacaoAssociadoRepository.save(sva);
-				log.info("Votação inserida com sucesso.");
-			}
-		} else {
-			log.info("Associado não está apto para votar.");
-		}
+	
+	/**
+		Método para ver o Resultado de uma votação por Pauta. Será exibido o nome da pautam, os votos sim, não e o total.
+		@author Alexandre Oliveira
+		@version 1.0
+	*/
+	public Votacao resultado(Long idPauta) {
+		return votacaoRepository.resultado(idPauta);
 	}
 	
-	public Votacao resultado(Long idPauta) {
-		Votacao res = votacaoRepository.resultado(idPauta);
-		return res;
+	private boolean verificaEncerramentoSessao(Optional<SessaoVotacao> verificaSessao) {
+		boolean f = verificaSessao.get().getDataCadastro().plusMinutes(verificaSessao.get().getTempoAbertura()).isBefore(LocalDateTime.now());
+		return f;
 	}
 
 }

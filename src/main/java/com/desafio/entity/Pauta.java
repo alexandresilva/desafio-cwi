@@ -7,17 +7,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "pauta")
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Pauta {
 	
 	@Id
@@ -29,27 +32,9 @@ public class Pauta {
 	
 	@Column(name = "data_cadastro")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss")
-	private LocalDateTime dataCadastro;
-			
-	public Pauta() {
-		super();
-	}
-	
-	public Pauta(Long id, String descricao, LocalDateTime dataCadastro) {
-		this.id = id;
-		this.dataCadastro = LocalDateTime.now();
-		this.descricao = descricao;
-	}
+	private LocalDateTime dataCadastro;	
 
-	public Pauta(String descricao) {
-		
-		if( descricao == null){
-			throw new IllegalArgumentException("A descrição da Pauta não pode ser nula ou vazia");
-		}
-		
-		this.dataCadastro = LocalDateTime.now();
-		this.descricao = descricao;
-	}
-	
+    @OneToOne(mappedBy = "pauta")
+    private SessaoVotacao sv;
 
 }

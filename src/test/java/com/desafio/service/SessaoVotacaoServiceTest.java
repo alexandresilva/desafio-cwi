@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.desafio.entity.Pauta;
 import com.desafio.entity.SessaoVotacao;
 import com.desafio.repository.SessaoVotacaoRepository;
 
@@ -25,16 +26,24 @@ public class SessaoVotacaoServiceTest {
 	private SessaoVotacaoRepository sessaoVotacaoRepository;
 	
 	SessaoVotacao sv = new SessaoVotacao();
+	Pauta p = new Pauta();
 	
 	@Before
 	public void setup() {
+		
+		p = Pauta
+				.builder()
+				.id(1L)
+				.descricao("Teste cadastro pauta")
+				.dataCadastro(LocalDateTime.now())
+				.build();
 		
 		sv = SessaoVotacao
 				.builder()
 				.id(1L)
 				.descricao("Sessão Test")
 				.dataCadastro(LocalDateTime.now())
-				.idPauta(1L)
+				.pauta(p)
 				.tempoAbertura(30)
 				.build();
 		

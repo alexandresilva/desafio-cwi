@@ -1,7 +1,5 @@
 package com.desafio.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,14 +8,20 @@ import com.desafio.entity.Pauta;
 import com.desafio.exception.ApiException;
 import com.desafio.repository.PautaRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class PautaCadastrarService {
-	
-	private static final Logger log = LoggerFactory.getLogger (PautaCadastrarService.class);
 	
 	@Autowired
 	private PautaRepository pautaRepository;
 
+	/**
+		Método para cadastrar uma Pauta
+		@author Alexandre Oliveira
+		@version 1.0
+	*/
 	public void cadastrar(PautaDTO pautaDTO) {
 		
 		validaRegrasDeNegocio(pautaDTO);

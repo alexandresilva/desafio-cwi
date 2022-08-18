@@ -10,6 +10,6 @@ public interface AssociadoRepository extends JpaRepository<Associado, Long> {
 	
 	Optional<Associado> findById(Long idAssociado);
 	
-	Associado findByCpf(String cpf);
+	Optional<Associado> findByCpf(String cpf);
 
 }

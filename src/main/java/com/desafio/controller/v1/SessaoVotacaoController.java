@@ -25,8 +25,7 @@ public class SessaoVotacaoController {
 	
 	@ApiOperation(value = "Abre uam Sessão para Votação")
 	@PostMapping("/abrir-sessao")
-	public ResponseEntity<SessaoVotacao> abrirSessaoVotacao(@RequestBody SessaoVotacao sv) {
-		
+	public ResponseEntity<SessaoVotacao> abrirSessaoVotacao(@RequestBody SessaoVotacao sv) {		
 		sessaoVotacaoService.abrirSessaoVotacao(sv);
 		URI location = URI.create(String.format("/abrir-sessao/%s", sv.getId()));
 	    return ResponseEntity.created(location).build();
