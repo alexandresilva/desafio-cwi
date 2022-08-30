@@ -3,7 +3,6 @@ package com.desafio.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.desafio.dto.PautaDTO;
 import com.desafio.entity.Pauta;
 import com.desafio.exception.ApiException;
 import com.desafio.repository.PautaRepository;
@@ -22,28 +21,25 @@ public class PautaCadastrarService {
 		@author Alexandre Oliveira
 		@version 1.0
 	*/
-	public void cadastrar(PautaDTO pautaDTO) {
+	public void cadastrar(Pauta pauta) {
 		
-		validaRegrasDeNegocio(pautaDTO);
-		Pauta pauta = new Pauta();
-		pauta.setDescricao(pautaDTO.getDescricao());
-		pauta.setDataCadastro(pautaDTO.getDataCadastro());
+		validaRegrasDeNegocio(pauta);
+		pauta.setDescricao(pauta.getDescricao());
+		pauta.setDataCadastro(pauta.getDataCadastro());
 		pautaRepository.save(pauta);
-		
-		pautaDTO.setId(pauta.getId());
 		
 		log.info("Pauta cadastrada com sucesso.");
 	}
 	
-	private void validaRegrasDeNegocio(PautaDTO pautaDTO) {
+	private void validaRegrasDeNegocio(Pauta pauta) {
 		
-		if(pautaDTO.getDescricao() == null)
+		if(pauta.getDescricao() == null)
 			throw new ApiException("Campo 'Descrição' é obrigatório");
 		
-		if(pautaDTO.getDescricao().split(" ").length <= 1)
+		if(pauta.getDescricao().split(" ").length <= 1)
 			throw new ApiException("Campo 'Descrição' deve possuir mais de uma palavra");
 		
-		if(pautaDTO.getDataCadastro() == null)
+		if(pauta.getDataCadastro() == null)
 			throw new ApiException("Data de Cadastro é obrigatória");
 		
 	}

@@ -52,37 +52,49 @@ public class SessaoVotacaoAssociadoService {
 
 		if(verificaSessao.isPresent()) {
 			
-			Optional<SessaoVotacaoAssociado> verificaVoto = sessaoVotacaoAssociadoRepository.findByIdSessaoVotacaoAndIdAssociado(sva.getIdSessaoVotacao(), sva.getIdAssociado());
-			
-			if(verificaVoto.isPresent()) {
-				
-				Optional<Associado> associado = associadoRepository.findById(sva.getIdAssociado());
-				CPFResponse cpfResponse = cpfClient.getCpf(associado.get().getCpf());
-				cpfResponse.setCpf(associado.get().getCpf());
-				
-				if(cpfResponse.getStatus().equals("ABLE_TO_VOTE") && associado.get().getApto()) {
-					
-					if (verificaEncerramentoSessao(verificaSessao)) {
-						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-						String dataEncerramento = verificaSessao.get().getDataCadastro().format(formatter);
-						log.info("Sessão Encerrada -> [Horário encerramento: " + dataEncerramento + "]");
-					} else {
-						sessaoVotacaoAssociadoRepository.save(sva);
-						log.info("Votação inserida com sucesso.");
-					}
-					
-				}else {
-					log.info("O CPF " + cpfResponse.getCpf() + " NÃO ESTÁ APTO para votar");
-				}
-				
-			}else {
-				log.info("Associado já votou nesta Sessão.");
-			}
+			verificaVoto(sva, verificaSessao);
 			
 		}else {
 			log.info("Sessão não existente.");
 		}
 
+	}
+
+
+	private void verificaVoto(SessaoVotacaoAssociado sva, Optional<SessaoVotacao> verificaSessao) {
+		
+		Optional<SessaoVotacaoAssociado> verificaVoto = sessaoVotacaoAssociadoRepository.findByIdSessaoVotacaoAndIdAssociado(sva.getIdSessaoVotacao(), sva.getIdAssociado());
+		
+		if(verificaVoto.isPresent()) {
+			
+			verificaCpfEAptidao(sva, verificaSessao);
+			
+		}else {
+			log.info("Associado já votou nesta Sessão.");
+		}
+	}
+
+
+	private void verificaCpfEAptidao(SessaoVotacaoAssociado sva, Optional<SessaoVotacao> verificaSessao) {
+		
+		Optional<Associado> associado = associadoRepository.findById(sva.getIdAssociado());
+		CPFResponse cpfResponse = cpfClient.getCpf(associado.get().getCpf());
+		cpfResponse.setCpf(associado.get().getCpf());
+		
+		if(cpfResponse.getStatus().equals("ABLE_TO_VOTE") && associado.get().getApto()) {
+			
+			if (verificaEncerramentoSessao(verificaSessao)) {
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+				String dataEncerramento = verificaSessao.get().getDataCadastro().format(formatter);
+				log.info("Sessão Encerrada -> [Horário encerramento: " + dataEncerramento + "]");
+			} else {
+				sessaoVotacaoAssociadoRepository.save(sva);
+				log.info("Votação inserida com sucesso.");
+			}
+			
+		}else {
+			log.info("O CPF " + cpfResponse.getCpf() + " NÃO ESTÁ APTO para votar");
+		}
 	}
 
 	

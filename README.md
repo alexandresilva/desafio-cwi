@@ -45,6 +45,8 @@ Este projeto está rodando com a versão 1.8
 - [2] [POST /sessao-votacao/v1/abrir-sessao](http://localhost:8081/sessao-votacao/v1/abrir-sessao)
 - [3] [POST /sessao-votacao-associado/v1/votar](http://localhost:8081/sessao-votacao-associado/v1/votar)
 - [4] [POST /sessao-votacao-associado/v1/resultado/2](http://localhost:8081/sessao-votacao-associado/v1/resultado/2)
+- [5] [GET /associado/v1/listarTodos](http://localhost:8081/associado/v1/listarTodos)
+- [6] [GET /associado/v1/listarPorId/1](http://localhost:8081/associado/v1/listarPorId/1)
 
 ## Exemplos de uso no Postman
 

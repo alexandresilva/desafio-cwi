@@ -35,6 +35,6 @@ public class Pauta {
 	private LocalDateTime dataCadastro;	
 
     @OneToOne(mappedBy = "pauta")
-    private SessaoVotacao sv;
+    private SessaoVotacao sessaoVotacao;
 
 }

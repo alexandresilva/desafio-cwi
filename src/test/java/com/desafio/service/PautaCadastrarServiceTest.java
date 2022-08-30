@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.desafio.client.CPFClient;
-import com.desafio.dto.PautaDTO;
 import com.desafio.entity.Pauta;
 import com.desafio.exception.ApiException;
 import com.desafio.repository.PautaRepository;
@@ -32,9 +31,8 @@ public class PautaCadastrarServiceTest {
 	@Test
 	public void deveCadastrarPauta(){
 		
-		PautaDTO pauta = PautaDTO
+		Pauta pauta = Pauta
 				.builder()
-				.id(1L)
 				.descricao("Pauta para aumento salarial")
 				.dataCadastro(LocalDateTime.now())
 				.build();
@@ -47,7 +45,7 @@ public class PautaCadastrarServiceTest {
 	@Test(expected = ApiException.class)
 	public void naoCadastrarPautaSemNome(){
 		
-		PautaDTO pauta = PautaDTO
+		Pauta pauta = Pauta
 				.builder()
 				.id(1L)
 				.descricao(null)
@@ -62,7 +60,7 @@ public class PautaCadastrarServiceTest {
 	@Test(expected = ApiException.class)
 	public void naoCadastrarPautaSemData(){
 		
-		PautaDTO pauta = PautaDTO
+		Pauta pauta = Pauta
 				.builder()
 				.id(1L)
 				.descricao("Pauta para aumento salarial")
@@ -78,7 +76,7 @@ public class PautaCadastrarServiceTest {
 	@Test(expected = ApiException.class)
 	public void naoCadastrarPautaComApenasUmaPalavra(){
 		
-		PautaDTO pauta = PautaDTO
+		Pauta pauta = Pauta
 				.builder()
 				.id(1L)
 				.descricao("Pauta")
