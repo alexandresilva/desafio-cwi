@@ -22,19 +22,19 @@ public class SessaoVotacaoService {
 		@author Alexandre Oliveira
 		@version 1.0
 	*/
-	public void abrirSessaoVotacao(SessaoVotacao sv) {
+	public void abrirSessaoVotacao(SessaoVotacao sessaoVotacao) {
 		
 		/*
 		 * Caso não seja informado o tempo de abertura ou informado ZERO, será setado 1 minuto por default 
 		 */
-		if(sv.getTempoAbertura() == null || sv.getTempoAbertura() == 0) {
-			sv.setTempoAbertura(1);
+		if(sessaoVotacao.getTempoAbertura() == null || sessaoVotacao.getTempoAbertura() == 0) {
+			sessaoVotacao.setTempoAbertura(1);
 		}
 		
-		sv.setDataCadastro(LocalDateTime.now());
-		sessaoVotacaoRepository.save(sv);
+		sessaoVotacao.setDataCadastro(LocalDateTime.now());
+		sessaoVotacaoRepository.save(sessaoVotacao);
 		
-		log.info("ID de Abertura da Sessão: " + sv.getId());
+		log.info("ID de Abertura da Sessão: " + sessaoVotacao.getId());
 
 	}
 	

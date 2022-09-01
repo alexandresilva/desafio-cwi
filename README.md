@@ -43,8 +43,8 @@ Este projeto está rodando com a versão 1.8
 
 - [1] [POST /pauta/v1/cadastrar](http://localhost:8081/pauta/v1/cadastrar)
 - [2] [POST /sessao-votacao/v1/abrir-sessao](http://localhost:8081/sessao-votacao/v1/abrir-sessao)
-- [3] [POST /sessao-votacao-associado/v1/votar](http://localhost:8081/sessao-votacao-associado/v1/votar)
-- [4] [POST /sessao-votacao-associado/v1/resultado/2](http://localhost:8081/sessao-votacao-associado/v1/resultado/2)
+- [3] [POST /associado/v1/votar](http://localhost:8081/sessao-votacao-associado/v1/votar)
+- [4] [POST /associado/v1/resultado/2](http://localhost:8081/sessao-votacao-associado/v1/resultado/2)
 - [5] [GET /associado/v1/listarTodos](http://localhost:8081/associado/v1/listarTodos)
 - [6] [GET /associado/v1/listarPorId/1](http://localhost:8081/associado/v1/listarPorId/1)
 
@@ -54,7 +54,12 @@ Este projeto está rodando com a versão 1.8
 ```
 {
     "descricao": "Pauta para votação do aumento salarial",
-    "dataCadastro": "2022-08-05T14:36:22"
+    "sessaoVotacao": {
+        "id": 1,
+        "descricao": "Sessão para votação de aumento salarial",
+        "dataCadastro": "2022-08-31T21:10:00",
+        "tempoAbertura": 30
+    }
 }
 ```
 - [2] Abrir Sessão de Votação:
@@ -69,14 +74,34 @@ Este projeto está rodando com a versão 1.8
 - [3] Votar: 
 ```
 {
-    "idSessaoVotacao": 3,
-    "idAssociado": 2,
-    "voto": false
+    "pauta":
+        {
+            "id": 12,
+            "descricao": "Aumento salarial para diretores",
+            "dataCadastro": "2022-09-01T10:00:00",
+            "sessaoVotacao": {
+                "id": 1,
+                "descricao": "Sessão para votação de aumento salarial",
+                "dataCadastro": "2022-08-31T21:10:00",
+                "tempoAbertura": 30
+            }
+        },
+    "associado": 
+        {
+            "id": "11",
+            "nome": "Suzana",
+            "email": "alexandre@gmail.com",
+            "cpf": "29834198000",
+            "apto": true,
+            "dataCadastro": "2022-08-01T10:00:00"
+        },
+    "voto": true,
+    "dataCadastro": "2022-08-01T10:00:00"
 }
 ```
 - [4] Ver Resultado:
 ```
-http://localhost:8081/sessao-votacao-associado/v1/resultado/3
+http://localhost:8081/votacao/v1/resultado/11
 ```
 
 ***

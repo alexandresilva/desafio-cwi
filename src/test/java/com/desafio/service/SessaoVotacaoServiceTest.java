@@ -43,7 +43,6 @@ public class SessaoVotacaoServiceTest {
 				.id(1L)
 				.descricao("Sessão Test")
 				.dataCadastro(LocalDateTime.now())
-				.pauta(p)
 				.tempoAbertura(30)
 				.build();
 		

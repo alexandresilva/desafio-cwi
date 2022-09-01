@@ -34,7 +34,7 @@ public class Pauta {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime dataCadastro;	
 
-    @OneToOne(mappedBy = "pauta")
+    @OneToOne
     private SessaoVotacao sessaoVotacao;
 
 }

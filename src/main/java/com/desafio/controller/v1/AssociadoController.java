@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.desafio.entity.Associado;
+import com.desafio.entity.SessaoVotacao;
+import com.desafio.entity.Voto;
 import com.desafio.service.AssociadoService;
 
 import io.swagger.annotations.Api;
@@ -45,6 +47,13 @@ public class AssociadoController {
 	@GetMapping("/listarPorId/{id}")
 	public Optional<Associado> listarPorId(@PathVariable Long id) {		
 		return associadoService.listarPorId(id);
+	}
+	
+	@ApiOperation(value = "Inserir apenas um voto por Associado")
+	@PostMapping("/votar")
+	public ResponseEntity<SessaoVotacao> enviarVoto(@RequestBody Voto voto) {
+		associadoService.enviarVoto(voto);
+		return ResponseEntity.ok().build();
 	}
 
 }

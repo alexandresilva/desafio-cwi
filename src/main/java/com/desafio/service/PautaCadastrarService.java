@@ -1,5 +1,7 @@
 package com.desafio.service;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +27,7 @@ public class PautaCadastrarService {
 		
 		validaRegrasDeNegocio(pauta);
 		pauta.setDescricao(pauta.getDescricao());
-		pauta.setDataCadastro(pauta.getDataCadastro());
+		pauta.setDataCadastro(LocalDateTime.now());
 		pautaRepository.save(pauta);
 		
 		log.info("Pauta cadastrada com sucesso.");
@@ -38,9 +40,6 @@ public class PautaCadastrarService {
 		
 		if(pauta.getDescricao().split(" ").length <= 1)
 			throw new ApiException("Campo 'Descrição' deve possuir mais de uma palavra");
-		
-		if(pauta.getDataCadastro() == null)
-			throw new ApiException("Data de Cadastro é obrigatória");
 		
 	}
 }

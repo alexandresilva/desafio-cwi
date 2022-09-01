@@ -35,11 +35,7 @@ public class SessaoVotacao {
 	@Column(name = "data_cadastro")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime dataCadastro;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "idPauta", referencedColumnName = "id")
-	private Pauta pauta;
-	
+
 	@Column(name = "tempo_abertura")
 	private Integer tempoAbertura;
 	
