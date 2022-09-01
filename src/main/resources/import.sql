@@ -1,6 +1,6 @@
-insert into SESSAO_VOTACAO (id, descricao, data_cadastro, tempo_abertura) values (10, 'Sessão para votação de aumento salarial', now(), 30);
-insert into SESSAO_VOTACAO (id, descricao, data_cadastro, tempo_abertura) values (11, 'Sessão para criação de novo cargo', now(), 30);
-insert into SESSAO_VOTACAO (id, descricao, data_cadastro, tempo_abertura) values (12, 'Sessão para expulsão de colaborador', now(), 30);
+insert into SESSAO_VOTACAO (id, data_cadastro, data_final_sessao) values (10, now(), DATEADD(minute,30,now()));
+insert into SESSAO_VOTACAO (id, data_cadastro, data_final_sessao) values (11, now(), DATEADD(minute,30,now()));
+insert into SESSAO_VOTACAO (id, data_cadastro, data_final_sessao) values (12, now(), DATEADD(minute,30,now()));
 
 insert into PAUTA (id, descricao, data_cadastro, sessao_votacao_id) values (10, 'Aumento salarial para diretores', now(), 10);
 insert into PAUTA (id, descricao, data_cadastro, sessao_votacao_id) values (11, 'Pauta para novo cargo', now(), 11);

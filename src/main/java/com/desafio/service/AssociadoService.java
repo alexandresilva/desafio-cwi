@@ -141,7 +141,7 @@ public class AssociadoService {
 	}
 	
 	private boolean verificaEncerramentoSessao(Voto voto) {
-		boolean flag = voto.getPauta().getSessaoVotacao().getDataCadastro().plusMinutes(voto.getPauta().getSessaoVotacao().getTempoAbertura()).isBefore(LocalDateTime.now());
+		boolean flag = voto.getPauta().getSessaoVotacao().getDataCadastro().isBefore(voto.getPauta().getSessaoVotacao().getDataFinalSessao());
 		return flag;
 	}
 

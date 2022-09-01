@@ -6,10 +6,7 @@ import org.springframework.stereotype.Service;
 import com.desafio.entity.Votacao;
 import com.desafio.repository.VotacaoRepository;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Service
-@Slf4j
 public class VotacaoService {
 
 	@Autowired

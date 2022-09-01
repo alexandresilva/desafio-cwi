@@ -27,11 +27,12 @@ public class SessaoVotacaoService {
 		/*
 		 * Caso não seja informado o tempo de abertura ou informado ZERO, será setado 1 minuto por default 
 		 */
-		if(sessaoVotacao.getTempoAbertura() == null || sessaoVotacao.getTempoAbertura() == 0) {
-			sessaoVotacao.setTempoAbertura(1);
+		if(sessaoVotacao.getDataFinalSessao() == null) {
+			sessaoVotacao.setDataFinalSessao(LocalDateTime.now().plusMinutes(30));
 		}
 		
 		sessaoVotacao.setDataCadastro(LocalDateTime.now());
+		sessaoVotacao.setDataFinalSessao(LocalDateTime.now().plusMinutes(30));
 		sessaoVotacaoRepository.save(sessaoVotacao);
 		
 		log.info("ID de Abertura da Sessão: " + sessaoVotacao.getId());

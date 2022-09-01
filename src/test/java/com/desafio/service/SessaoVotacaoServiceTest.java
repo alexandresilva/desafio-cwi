@@ -25,7 +25,7 @@ public class SessaoVotacaoServiceTest {
 	@Mock
 	private SessaoVotacaoRepository sessaoVotacaoRepository;
 	
-	SessaoVotacao sv = new SessaoVotacao();
+	SessaoVotacao sessaoVotacao = new SessaoVotacao();
 	Pauta p = new Pauta();
 	
 	@Before
@@ -38,19 +38,18 @@ public class SessaoVotacaoServiceTest {
 				.dataCadastro(LocalDateTime.now())
 				.build();
 		
-		sv = SessaoVotacao
+		sessaoVotacao = SessaoVotacao
 				.builder()
 				.id(1L)
-				.descricao("Sessão Test")
 				.dataCadastro(LocalDateTime.now())
-				.tempoAbertura(30)
+				.dataFinalSessao(LocalDateTime.now().plusMinutes(30))
 				.build();
 		
 	}
 
 	@Test
 	public void deveAbrirSessaoVotacao(){		
-		sessaoVotacaoService.abrirSessaoVotacao(sv);
+		sessaoVotacaoService.abrirSessaoVotacao(sessaoVotacao);
 		verify(sessaoVotacaoRepository).save(any(SessaoVotacao.class));
 	}
 

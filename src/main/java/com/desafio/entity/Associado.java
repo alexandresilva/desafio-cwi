@@ -39,4 +39,5 @@ public class Associado {
 	@Column(name = "data_cadastro", nullable = false)
 	private LocalDateTime dataCadastro;
 
+
 }
